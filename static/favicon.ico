@@ -1,0 +1,35 @@
+Press ? for neotree help
+<s/SE/Temp/baygeldin.github.io/
+ .git/
+ _notes/
+   content/
+     notes/
+   resources/
+   themes/
+     wasteland/
+       archetypes/
+       assets/
+         styles.scss
+       layouts/
+         _default/
+           baseof.html
+           list.html
+           single.html
+         partials/
+           footer.html
+           header.html
+           tags.html
+         404.html
+         index.html
+       LICENSE
+       theme.toml
+   config.toml
+ notes/
+ .gitignore
+ .ignore
+ CNAME
+ LICENSE
+ README.md
+ favicon.ico
+ home.jpg
+ index.html

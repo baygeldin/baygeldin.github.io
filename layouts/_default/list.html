@@ -1,0 +1,24 @@
+{{ define "content" }}
+<section>
+  <ul class="posts_listing offset-sm-1">
+    {{ range where (.Paginate (.Pages.ByDate.Reverse) 12).Pages "Section" "notes" }}
+    <li>
+      <div class="row" id="posts">
+        <div class="d-none d-sm-block col-sm-4 ubuntu timestamp">
+          <time>{{ .Date.Format "02 Jan 2006 15:04" }}</time>
+        </div>
+        <div class="col-sm ubuntu post">
+          <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+          <div class="tags-block">{{ if isset .Params "tags" }}{{ partial "tags" .Params.tags }}{{ end }}</div>
+        </div>
+      </div>
+    </li>
+    {{ end }}
+  </ul>
+  <div class="row">
+    <div class="offset-sm-4 pagination-block">
+      {{ template "_internal/pagination.html" . }}
+    </div>
+  </div>
+</section>
+{{ end }}

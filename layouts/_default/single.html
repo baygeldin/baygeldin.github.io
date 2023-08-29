@@ -1,0 +1,13 @@
+{{ define "content" }}
+<div class="blog-post">
+  <h1>{{.Title}}<span style="white-space: nowrap;">&nbsp;<a href="/notes" class="back-button"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span></a></span></h1>
+  <div class="tags-block">{{ if isset .Params "tags" }}{{ partial "tags" .Params.tags }}{{ end }}</div>
+  <div class="blog-post-subheader">
+    <time>{{ .Date.Format "02 Jan 2006 15:04" }}</time>
+  </div>
+  <div class="blog-post-content">
+    {{ .Content }}
+  </div>
+  {{/* template "_internal/disqus.html" . */}}
+</div>
+{{ end }}

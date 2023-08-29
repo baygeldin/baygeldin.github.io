@@ -1,0 +1,9 @@
+baseURL = "https://baygeldin.name"
+languageCode = "en-us"
+title = "alex baygeldin"
+publishDir = "public"
+disqusShortname = "baygeldin"
+disableLiveReload = true
+
+[permalinks]
+  notes = "/:sections/:filename/"

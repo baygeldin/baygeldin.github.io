@@ -1,0 +1,258 @@
+@import url("//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css");
+
+html {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: 'Ubuntu', sans-serif;
+  margin: auto;
+  width: 600px;
+  max-width: 100%;
+  overflow-x: hidden;
+  font-size: 16px;
+}
+
+#page-title {
+  text-align: center;
+}
+
+#page-title h1 a {
+  color: black;
+  font-size: 2.7rem;
+}
+
+.post {
+  max-width: 300px;
+
+  a {
+    color: black;
+  }
+}
+
+#author-name h6 a {
+  color: black;
+  font-weight: normal;
+  font-size: small;
+}
+
+#page-title a:hover, .post a:hover {
+  text-decoration: underline;
+}
+
+.wrap {
+  margin-top: 3em;
+}
+
+.ubuntu {
+  font-family: 'Ubuntu Mono', monospace;
+}
+
+.blog-post-content {
+  padding-top: 1em;
+  padding-bottom: 1em;
+  font-size: 1em;
+}
+
+.posts_listing {
+  margin-bottom: 0px;
+
+  li {
+    list-style-type: none;
+  }
+}
+
+h1 {
+  font-size: 2.5rem;
+}
+
+h2 {
+  font-size: 1.7rem;
+}
+
+h3 {
+  font-size: 1.4rem;
+}
+
+h4  {
+  font-size: 1.2rem;
+}
+
+h5  {
+  font-size: 1rem;
+}
+
+h6  {
+  font-size: 0.8rem;
+}
+
+code {
+  font-family: 'Ubuntu Mono', monospace;
+  white-space: pre;
+  overflow-x: auto;
+}
+
+pre {
+  overflow-x: auto;
+  padding-left: 5px;
+  padding-right: 5px;
+  border: 1px solid lighten(#111, 90);
+  background-color: #efefef
+}
+
+footer  {
+  text-align: center;
+}
+
+.page-item {
+  .page-link {
+    color: #000;
+    border: none;
+    padding: 5px;
+
+    &:hover {
+      color: #000;
+      background-color: #fff;
+      text-decoration: underline;
+    }
+
+    &:focus {
+      box-shadow: none;
+    }
+
+    a {
+      color: #000;
+    }
+  }
+
+
+  &.disabled {
+    .page-link {
+      color: #000;
+    }
+  }
+
+  &.active {
+    .page-link {
+      &:focus, &:hover {
+        background-color: #fff;
+        color: #000;
+      }
+
+      color: #000;
+      background-color: #fff;
+      text-decoration: underline;
+    }
+  }
+}
+
+.pagination-block {
+  padding-left: 50px;
+  font-size: 1.2rem;
+
+  @media (min-width: 576px) {
+    padding-left: 36px;
+  }
+}
+
+.tags-block {
+  margin-top: -5px;
+  font-size: 1.4rem;
+
+  a, a:hover {
+    color: black;
+  }
+}
+
+.footnote {
+  text-align: center;
+  font-size: 0.85rem;
+  color: lightgrey;
+  margin-top: 5px;
+  margin-bottom: 4em;
+  white-space: nowrap;
+  margin-left: -100%;
+  margin-right: -100%;
+
+
+  a {
+    color: lightgrey;
+    text-decoration: underline;
+  }
+}
+
+.pagination {
+  margin-top: 0;
+  margin-bottom: 0;
+
+  & > .disabled {
+    span {
+      border-color: none;
+      color: black;
+      border: none;
+      padding: 6px 6px;
+      cursor: default;
+
+      &:hover, &:focus {
+        background-color: white;
+      }
+    }
+  }
+}
+
+.back-button {
+  margin-left: 0.2rem;
+  color: #000;
+  vertical-align: middle;
+  font-size: 1.5rem;
+
+  &:hover {
+    color: #000;
+  }
+}
+
+.timestamp {
+  text-align: right;
+  color: #000;
+}
+
+.blog-post-subheader {
+  color: #000;
+  font-size: 1.4rem;
+}
+
+// Homepage
+
+.homepage-block {
+  position: absolute;
+	top: 50%;
+  left: 50%;
+	height: 500px;
+	width: 500px;
+  max-height: 100%;
+  max-width: 100%;
+  transform: translate(-50%, -50%);
+	text-align: center;
+	font-size: 12px;
+  font-family: none;
+  max-width: 90vw;
+}
+
+.homepage-block img {
+	width: 100%;
+  margin-bottom: 1em;
+}
+
+.nowrap {
+	white-space: pre;
+}
+
+.notes-link {
+  color: #000;
+  text-decoration: underline;
+
+  &:hover, &:focus {
+    color: #000;
+  }
+}
