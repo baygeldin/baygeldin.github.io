@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base href="@@base@@" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="viewport-fit=cover, width=device-width, height=device-height, initial-scale=1" />
+    <link rel="stylesheet" href="engine/main.css" />
+    <link rel="stylesheet" href="theme/vancouver.css" />
+    <link rel="stylesheet" href="engine/katex/katex.min.css" />
+    <!--<link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />-->
+    <style>
+    :root{
+--logo: ;
+--darkaccent1color: #A7987C;
+--lightaccent1color: #A7987C;
+--accent2: #43aa8b;
+--accent3: #f9c74f;
+--accent4: #90be6d;
+--accent5: #f8961e;
+--accent6: #577590;
+--lighttitletextcolor: #ffffffEE;
+--darktitletextcolor: #000000EE;
+--lightbodytextcolor: #ffffffEE;
+--darkbodytextcolor: #000000EE;
+--lightbackgroundcolor: transparent;
+--darkbackgroundcolor: transparent;
+--bodyfont: Montserrat;
+--titlefont: Montserrat;
+} 
+
+    </style>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="engine/print.css"
+      media="print"
+    />
+  </head>
+
+  <body class="responsive">
+    <div class="reveal">
+      <div class="slides"><section class="variable-size-headings light cover-container present has-light-background fitted" data-background-color="#cfcac7" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-cover" style="width: 100%; font-size: 1rem;">
+        <div style=""><h1 id="takingtheedgeoff">Taking the <em>edge</em> off</h1>
+
+<h4 id="demystifyingedgecomputingusingcloudflareworkers">Demystifying edge computing using Cloudflare Workers</h4></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      
+</section><section class="variable-size-headings light grid-container present has-light-background fitted" data-background-color="#cfc9c6" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-grid grid-items-4 media-grid" style="width: 100%; font-size: 0.906rem;">
+        <div style=""><h2 id="about">About</h2>
+
+<h3 id="alexanderbaygeldin">Alexander Baygeldin</h3>
+
+<h4 id="backendengineeratevilmartians">Backend engineer at Evil Martians</h4></div><img src="images/baygeldin_photo.png" class=" size-contain position-right-top" style=""><div style=""><p><a href="https://github.com/baygeldin">github.com/baygeldin</a></p>
+
+<p><a href="https://evl.ms/jobs">evl.ms/jobs</a></p></div><img src="images/em%20portuguese.png" class=" size-contain position-right-bottom" style="">
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+</section><section class="variable-size-headings light default-container present has-light-background fitted" data-background-color="#d0c9c6" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-default media-grid" style="width: 100%; font-size: 0.953rem;">
+        <div style=""><h2 id="whatisedgecomputingexactly">What is edge computing <em>exactly</em>?</h2>
+
+<div class="single-image-wrapper"><img src="images/wiki%20definition%20v2.png" class=" size-contain position-center-center"></div></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      
+</section><section class="variable-size-headings light has-background-image grid-container present has-light-background fitted" data-background-image="images/cloudflare network v1.svg" data-background-size="contain" data-background-color="#d1c8c5" style="display: grid;" data-updated="true">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-grid grid-items-0" style="width: 100%; font-size: 1rem;">
+        
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+</section><section class="variable-size-headings light title-container present fit-warning has-light-background fitted" data-background-color="#d2c8c5" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-title" style="width: 100%; font-size: 0.766rem;">
+        <div style=""><h2 id="serverless">serverless</h2>
+
+<h2 id="">+</h2>
+
+<h2 id="emphasisondatalocality">emphasis on data locality</h2>
+
+<h2 id="">=</h2>
+
+<h2 id="edgecomputing">edge computing</h2>
+
+<h4 id="kindof">(<em>kind of</em>)</h4></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      
+</section><section class="variable-size-headings light title-container present has-light-background fitted" data-background-color="#d3c8c5" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-title" style="width: 100%; font-size: 0.953rem;">
+        <div style=""><h5 id="benefit1">BENEFIT #1</h5>
+
+<h2 id="reducednbsplatencynbsp⚡️">reduced&nbsp;latency&nbsp;⚡️</h2></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      
+</section><section class="variable-size-headings light default-container present has-light-background fitted" data-background-color="#d4c7c4" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-default" style="width: 100%; font-size: 1rem;">
+        <div style=""><h3 id="wheredoesitmatter">Where does it matter?</h3>
+
+<ul>
+<li>healthcare</li>
+<li>self-driving cars</li>
+<li>AI assistants 🤔</li>
+</ul></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      
+</section><section class="variable-size-headings light title-container present has-light-background fitted" data-background-color="#d5c7c4" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-title" style="width: 100%; font-size: 0.859rem;">
+        <div style=""><h5 id="benefit2">BENEFIT #2</h5>
+
+<h2 id="savingnbspbandwidthnbsp📉">saving&nbsp;bandwidth&nbsp;📉</h2></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      
+</section><section class="variable-size-headings light default-container present has-light-background fitted" data-background-color="#d6c7c4" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-default" style="width: 100%; font-size: 1rem;">
+        <div style=""><h3 id="wheredoesitmatter">Where does it matter?</h3>
+
+<ul>
+<li>IoT (Internet of Things)</li>
+<li>smart content delivery</li>
+</ul></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      
+</section><section class="variable-size-headings light title-container present has-light-background fitted" data-background-color="#d5c7c3" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-title" style="width: 100%; font-size: 1rem;">
+        <div style=""><h5 id="interlude">INTERLUDE</h5>
+
+<h2 id="cutting">cutting</h2>
+
+<h4 id="throughthehypeof">through the hype of</h4>
+
+<h2 id="edge"><em>edge</em></h2>
+
+<h4 id="computing">computing</h4></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      
+</section><section class="variable-size-headings light full-image-container present has-light-background fitted" data-background-color="#d2c7c3" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-full-image media-grid" style="width: 100%; font-size: 1rem;">
+        <div style=""><div class="single-image-wrapper"><img src="images/keepcalm.png" class=" size-contain position-center-center"></div></div>
+        
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+</section><section class="variable-size-headings light title-container present has-light-background fitted" data-background-color="#cec7c3" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-title" style="width: 100%; font-size: 1rem;">
+        <div style=""><h2 id="mpa😎">MPA 😎</h2>
+
+<h4 id="goodoldays">(good ol' days)</h4></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      
+</section><section class="variable-size-headings light title-container present has-light-background fitted" data-background-color="#cbc7c2" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-title" style="width: 100%; font-size: 1rem;">
+        <div style=""><h2 id="mpanbsp→nbspspanbsp😬">MPA&nbsp;→&nbsp;SPA&nbsp;😬</h2></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      
+</section><section class="variable-size-headings light title-container present has-light-background fitted" data-background-color="#c8c7c2" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-title" style="width: 100%; font-size: 0.859rem;">
+        <div style=""><h2 id="mpanbsp→nbspspanbsp→nbspssrnbsp😵‍💫">MPA&nbsp;→&nbsp;SPA&nbsp;→&nbsp;SSR&nbsp;😵‍💫</h2></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      
+</section><section class="variable-size-headings light title-container present has-light-background fitted" data-background-color="#c4c7c2" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-title" style="width: 100%; font-size: 0.859rem;">
+        <div style=""><h2 id="mpanbsp→nbspspanbsp→nbspssrnbsp→">MPA&nbsp;→&nbsp;SPA&nbsp;→&nbsp;SSR&nbsp;→</h2>
+
+<h2 id="mpanbsp👀">MPA?&nbsp;👀</h2></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      
+</section><section class="variable-size-headings light full-image-container present has-light-background fitted" data-background-color="#c1c7c1" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-full-image media-grid" style="width: 100%; font-size: 1rem;">
+        <div style=""><div class="single-image-wrapper"><img src="images/where%20edge.png" class=" position-center-center"></div></div>
+        
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+</section><section class="variable-size-headings light title-container present has-light-background fitted" data-background-color="#bec7c1" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-title" style="width: 100%; font-size: 0.906rem;">
+        <div style=""><h2 id="dynamicnbspcontent"><em>dynamic</em>&nbsp;content</h2>
+
+<h3 id="atnbspthenbspspeednbspcomparablenbspto">at&nbsp;the&nbsp;speed&nbsp;comparable&nbsp;to</h3>
+
+<h2 id="staticnbspcontent"><em>static</em>&nbsp;content</h2>
+
+<h3 id="🚀🚀🚀">🚀🚀🚀</h3></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      
+</section><section class="variable-size-headings light title-container present has-light-background fitted" data-background-color="#bac7c1" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-title" style="width: 100%; font-size: 1rem;">
+        <div style=""><h5 id="benefit3">BENEFIT #3</h5>
+
+<h2 id="dxnbsp🤩">DX&nbsp;🤩</h2></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      
+</section><section class="variable-size-headings light default-container present has-light-background fitted" data-background-color="#bbc8c0" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-default" style="width: 100%; font-size: 1rem;">
+        <div style=""><h4 id="whatcanwedowiththis">What can we do with this?</h4>
+
+<ul>
+<li>advanced caching</li>
+<li>personalized content</li>
+<li>A/B testing</li>
+</ul></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      
+</section><section class="variable-size-headings light full-image-container present has-light-background fitted" data-background-color="#bdc9c0" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-full-image media-grid" style="width: 100%; font-size: 1rem;">
+        <div style=""><div class="single-image-wrapper"><img src="images/magic.gif" class=" size-contain position-center-center"></div></div>
+        
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+</section><section class="variable-size-headings light default-container present has-light-background fitted" data-background-color="#becac0" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-default media-grid" style="width: 100%; font-size: 0.859rem;">
+        <div style=""><div class="single-image-wrapper"><img src="images/Playbook_LogoLockup.svg" class=" size-contain position-left-center"></div>
+
+<h2 id="www.playbook.com">www.playbook.com</h2></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      
+</section><section class="variable-size-headings light default-container present has-light-background fitted" data-background-color="#c0cbc0" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-default" style="width: 100%; font-size: 1rem;">
+        <div style=""><h4 id="example1">EXAMPLE #1</h4>
+
+<h2 id="ssrcache">SSR cache</h2>
+
+<table>
+<colgroup>
+<col style="text-align:left;">
+<col style="text-align:left;">
+</colgroup>
+
+<tbody>
+<tr>
+	<td style="text-align:left;"><strong>Problem</strong></td>
+	<td style="text-align:left;">slow SSR responses</td>
+</tr>
+<tr>
+	<td style="text-align:left;"><strong>Solution</strong></td>
+	<td style="text-align:left;">serve the CSR version on initial request and cache the SSR version on the edge in the background</td>
+</tr>
+</tbody>
+</table></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      
+</section><section class="variable-size-headings light default-container present has-light-background fitted" data-background-color="#c2cdbf" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-default" style="width: 100%; font-size: 0.906rem;">
+        <div style=""><h4 id="example2">EXAMPLE #2</h4>
+
+<h2 id="canary-likedeployment">Canary-like deployment</h2>
+
+<table>
+<colgroup>
+<col style="text-align:left;">
+<col style="text-align:left;">
+</colgroup>
+
+<tbody>
+<tr>
+	<td style="text-align:left;"><strong>Problem</strong></td>
+	<td style="text-align:left;">rolling out for everyone is too risky</td>
+</tr>
+<tr>
+	<td style="text-align:left;"><strong>Solution</strong></td>
+	<td style="text-align:left;">route part of the user traffic to the canary instance using custom logic on the edge</td>
+</tr>
+</tbody>
+</table></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      
+</section><section class="variable-size-headings light default-container present has-light-background fitted" data-background-color="#c4cebf" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-default" style="width: 100%; font-size: 1rem;">
+        <div style=""><h4 id="example3">EXAMPLE #3</h4>
+
+<h2 id="replacingnginx">Replacing Nginx</h2>
+
+<table>
+<colgroup>
+<col style="text-align:left;">
+<col style="text-align:left;">
+</colgroup>
+
+<tbody>
+<tr>
+	<td style="text-align:left;"><strong>Problem</strong></td>
+	<td style="text-align:left;">Nginx 🌚</td>
+</tr>
+<tr>
+	<td style="text-align:left;"><strong>Solution</strong></td>
+	<td style="text-align:left;">Cloudflare Workers!</td>
+</tr>
+</tbody>
+</table></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      
+</section><section class="variable-size-headings light has-background-image default-container present has-light-background fitted" data-background-image="images/nginx dot conf.jpeg" data-background-color="#c5cfbf" style="display: grid;" data-updated="true">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-default" style="width: 100%; font-size: 1rem;">
+        <div style=""><p><code class="hljs stata">nginx.<span class="hljs-keyword">conf</span></code></p></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      
+</section><section class="variable-size-headings light title-container present has-light-background fitted" data-background-color="#c7d0bf" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-title" style="width: 100%; font-size: 0.859rem;">
+        <div style=""><h2 id="double-edgednbspsword">double-<em>edged</em>&nbsp;sword</h2>
+
+<h4 id="dataconsistency😓">(data consistency 😓)</h4></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      
+</section><section class="variable-size-headings light default-container present fit-warning has-light-background fitted" data-background-color="#c9d1bf" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-default" style="width: 100%; font-size: 0.672rem;">
+        <div style=""><h5 id="cloudflareworkers">Cloudflare Workers</h5>
+
+<h3 id="storageoptions">Storage options</h3>
+
+<table>
+<colgroup>
+<col style="text-align:left;">
+<col style="text-align:left;">
+</colgroup>
+
+<tbody>
+<tr>
+	<td style="text-align:left;"><strong>in-memory</strong></td>
+	<td style="text-align:left;">ad-hoc caching between requests</td>
+</tr>
+<tr>
+	<td style="text-align:left;"><strong>Cache API</strong></td>
+	<td style="text-align:left;">a bit more flexible CDN caching</td>
+</tr>
+<tr>
+	<td style="text-align:left;"><strong>KV</strong></td>
+	<td style="text-align:left;">eventually consistent key-value storage</td>
+</tr>
+<tr>
+	<td style="text-align:left;"><strong>D1</strong></td>
+	<td style="text-align:left;">distributed SQLite database</td>
+</tr>
+<tr>
+	<td style="text-align:left;"><strong>R2</strong></td>
+	<td style="text-align:left;">S3-like blob storage</td>
+</tr>
+<tr>
+	<td style="text-align:left;"><strong>Durable Objects</strong></td>
+	<td style="text-align:left;">strong consistency and real-time coordination</td>
+</tr>
+</tbody>
+</table></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      
+</section><section class="variable-size-headings light default-container present has-light-background fitted" data-background-color="#cdd2c1" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-default" style="width: 100%; font-size: 0.906rem;">
+        <div style=""><h5 id="cloudflareworkers">Cloudflare Workers</h5>
+
+<h3 id="features">Features</h3>
+
+<ul>
+<li>no cold starts (<code class="hljs">0ms</code> worldwide)</li>
+<li>cheap (<code class="hljs gams"><span class="hljs-meta"><span class="hljs-meta-keyword">$0</span>.50</span></code> per million requests)</li>
+<li>WebAssembly support</li>
+<li>Cron Triggers support</li>
+<li>WebSockets support</li>
+</ul></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      
+</section><section class="variable-size-headings light title-container present has-light-background fitted" data-background-color="#d1d4c2" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-title" style="width: 100%; font-size: 1rem;">
+        <div style=""><h5 id="cloudflareworkers">Cloudflare Workers</h5>
+
+<h2 id="demo">DEMO</h2></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      
+</section><section class="variable-size-headings light full-image-container present has-light-background fitted" data-background-color="#d5d6c4" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-full-image media-grid" style="width: 100%; font-size: 1rem;">
+        <div style=""><div class="single-image-wrapper"><img src="images/Clipboard_8.png" class=" position-center-top"></div></div>
+        
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+</section><section class="variable-size-headings light default-container present has-light-background fitted" data-background-color="#d9d7c6" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-default" style="width: 100%; font-size: 0.813rem;">
+        <div style=""><p><code class="hljs">wrangler.toml</code></p>
+
+<pre><code class="tool hljs ini"><span class="hljs-attr">name</span> = <span class="hljs-string">"example"</span>
+<span class="hljs-attr">main</span> = <span class="hljs-string">"index.js"</span>
+<span class="hljs-attr">compatibility_date</span> = <span class="hljs-string">"2023-08-14"</span>
+
+<span class="hljs-attr">account_id</span> = <span class="hljs-string">"&lt;your Cloudflare account ID&gt;"</span>
+
+<span class="hljs-attr">routes</span> = [
+  {
+    pattern = <span class="hljs-string">"https://www.example.com/*"</span>,
+    zone_name = <span class="hljs-string">"example.com"</span>
+  }
+]
+</code></pre></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      
+</section><section class="variable-size-headings light default-container present has-light-background fitted" data-background-color="#dcd9c8" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-default" style="width: 100%; font-size: 1rem;">
+        <div style=""><p><code class="hljs axapta"><span class="hljs-keyword">index</span>.js</code></p>
+
+<pre><code class="js hljs javascript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {
+  <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-title">fetch</span>(<span class="hljs-params">request, env, ctx</span>)</span> {
+    <span class="hljs-keyword">return</span> fetch(request)
+  }
+}
+</code></pre></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      
+</section><section class="variable-size-headings light default-container present has-light-background fitted" data-background-color="#e0dbc9" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-default" style="width: 100%; font-size: 1rem;">
+        <div style=""><h3 id="letsgooo">LET'S GOOO!</h3>
+
+<ol>
+<li>install Wrangler</li>
+<li><code class="hljs elixir"><span class="hljs-variable">$ </span>wrangler login</code></li>
+<li><code class="hljs elixir"><span class="hljs-variable">$ </span>wrangler deploy</code></li>
+</ol></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      
+</section><section class="variable-size-headings light default-container present has-light-background fitted" data-background-color="#e4dccb" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-default" style="width: 100%; font-size: 0.906rem;">
+        <div style=""><p><code class="hljs axapta"><span class="hljs-keyword">index</span>.js</code></p>
+
+<pre><code class="js hljs javascript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {
+  <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-title">fetch</span>(<span class="hljs-params">request, env, ctx</span>)</span> {
+    <span class="hljs-keyword">const</span> url = <span class="hljs-keyword">new</span> URL(request.url)
+
+    <span class="hljs-keyword">if</span> (url.pathname === <span class="hljs-string">'/hello'</span>) {
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Response(<span class="hljs-string">'Hello World!'</span>)
+    }
+
+    <span class="hljs-keyword">return</span> fetch(request)
+  }
+}
+</code></pre></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      
+</section><section class="variable-size-headings light full-image-container present has-light-background fitted" data-background-color="#e8decd" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-full-image media-grid" style="width: 100%; font-size: 1rem;">
+        <div style=""><div class="single-image-wrapper"><img src="images/Clipboard_3.png" class=" position-center-top"></div></div>
+        
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+</section><section class="variable-size-headings light default-container present fit-warning has-light-background fitted" data-background-color="#e9dfcf" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-default" style="width: 100%; font-size: 0.719rem;">
+        <div style=""><pre><code class="js hljs javascript"><span class="hljs-keyword">const</span> geo = request.cf || {}
+
+<span class="hljs-keyword">let</span> content = <span class="hljs-string">''</span>
+
+content += <span class="hljs-string">`Colo: <span class="hljs-subst">${geo.colo}</span>`</span>
+content += <span class="hljs-string">`Country: <span class="hljs-subst">${geo.country}</span>`</span>
+content += <span class="hljs-string">`City: <span class="hljs-subst">${geo.city}</span>`</span>
+content += <span class="hljs-string">`Latitude: <span class="hljs-subst">${geo.latitude}</span>`</span>
+content += <span class="hljs-string">`Longitude: <span class="hljs-subst">${geo.longitude}</span>`</span>
+content += <span class="hljs-string">`Timezone: <span class="hljs-subst">${geo.timezone}</span>`</span>
+
+<span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Response(content, {
+  <span class="hljs-attr">headers</span>: {
+    <span class="hljs-string">'content-type'</span>: <span class="hljs-string">'text/plain;charset=UTF-8'</span>
+  }
+})
+</code></pre></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      
+</section><section class="variable-size-headings light full-image-container present has-light-background fitted" data-background-color="#e8dfd1" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-full-image media-grid" style="width: 100%; font-size: 1rem;">
+        <div style=""><div class="single-image-wrapper"><img src="images/Clipboard_5.png" class=" position-center-top"></div></div>
+        
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+</section><section class="variable-size-headings light default-container present has-light-background fitted" data-background-color="#e7dfd4" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-default" style="width: 100%; font-size: 0.813rem;">
+        <div style=""><pre><code class="js hljs javascript"><span class="hljs-keyword">const</span> rewriter = <span class="hljs-keyword">new</span> HTMLRewriter().on(<span class="hljs-string">'span#caption'</span>, {
+  <span class="hljs-keyword">async</span> element (element) {
+    element.setInnerContent(<span class="hljs-string">'ｈｅｌｌｏ　ｗｏｒｌｄ'</span>)
+  }
+})
+
+<span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> fetch(request, {
+  <span class="hljs-attr">headers</span>: {
+    <span class="hljs-string">'Content-Type'</span>: <span class="hljs-string">'text/html;charset=UTF-8'</span>
+  }
+})
+
+<span class="hljs-keyword">return</span> rewriter.transform(response)
+</code></pre></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      
+</section><section class="variable-size-headings light default-container present has-light-background fitted" data-background-color="#e6e0d6" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-default" style="width: 100%; font-size: 0.906rem;">
+        <div style=""><pre><code class="js hljs javascript"><span class="hljs-keyword">async</span> element (element) {
+  <span class="hljs-keyword">const</span> code = request.cf?.country || <span class="hljs-string">'GB'</span>
+
+  <span class="hljs-keyword">const</span> url = <span class="hljs-keyword">new</span> URL(<span class="hljs-string">`<span class="hljs-subst">${env.HELLO_API_URL}</span>/?cc=<span class="hljs-subst">${code}</span>`</span>)
+
+  <span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> fetch(url)
+  <span class="hljs-keyword">const</span> data = <span class="hljs-keyword">await</span> response.json()
+
+  <span class="hljs-keyword">const</span> hello = data.hello.toLowerCase()
+
+  element.setInnerContent(<span class="hljs-string">`<span class="hljs-subst">${hello}</span> world`</span>)
+}
+</code></pre></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      
+</section><section class="variable-size-headings light default-container present fit-warning has-light-background fitted" data-background-color="#e5e0d8" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-default" style="width: 100%; font-size: 0.625rem;">
+        <div style=""><pre><code class="js hljs javascript"><span class="hljs-keyword">async</span> element (element) {
+  <span class="hljs-keyword">const</span> code = request.cf?.country || <span class="hljs-string">'GB'</span>
+
+  <span class="hljs-keyword">let</span> hello = <span class="hljs-keyword">await</span> env.KV.get(<span class="hljs-string">`<span class="hljs-subst">${code}</span>-hello`</span>)
+
+  <span class="hljs-keyword">if</span> (!hello) {
+    <span class="hljs-keyword">const</span> url = <span class="hljs-keyword">new</span> URL(<span class="hljs-string">`<span class="hljs-subst">${env.HELLO_API_URL}</span>/?cc=<span class="hljs-subst">${code}</span>`</span>)
+
+    <span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> fetch(url)
+    <span class="hljs-keyword">const</span> data = <span class="hljs-keyword">await</span> response.json()
+
+    hello = data.hello.toLowerCase()
+
+    ctx.waitUntil(env.KV.put(<span class="hljs-string">`<span class="hljs-subst">${code}</span>-hello`</span>, hello))
+  }
+
+  element.setInnerContent(<span class="hljs-string">`<span class="hljs-subst">${hello}</span> world`</span>)
+}
+</code></pre></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      
+</section><section class="variable-size-headings light full-image-container present has-light-background fitted" data-background-color="#e4e0db" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-full-image media-grid" style="width: 100%; font-size: 1rem;">
+        <div style=""><div class="single-image-wrapper"><img src="images/Clipboard_7.png" class=" position-center-top"></div></div>
+        
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+</section><section class="variable-size-headings light default-container present has-light-background fitted" data-background-color="#e3e1dd" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-default" style="width: 100%; font-size: 1rem;">
+        <div style=""><h5 id="cloudflareworkers">Cloudflare Workers</h5>
+
+<h3 id="starterpack">Starter pack</h3>
+
+<ul>
+<li>Router (Hono)</li>
+<li>Linter (Standard)</li>
+<li>Tests (Jest &amp; Miniflare)</li>
+<li>TypeScript</li>
+</ul></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      
+</section><section class="variable-size-headings light v-split-container present fit-warning has-light-background fitted" data-background-color="#e2e1df" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-v-split media-grid" style="width: 100%; font-size: 0.766rem;">
+        <div style=""><h2 id="thenbspedgenbspend">THE&nbsp;<del>EDGE</del>&nbsp;END</h2>
+
+<h4 id="checkouttherepo"><strong>Check out the repo!</strong></h4>
+
+<p><a href="https://github.com/baygeldin/lisbon-meetup-examples">github.com/baygeldin/lisbon-meetup-examples</a></p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<h4 id="questionscontactme"><em>Questions?</em> Contact me!</h4>
+
+<ul>
+<li>baygeldin@evilmartians.com</li>
+<li><a href="https://t.me/baygeldin">t.me/baygeldin</a></li>
+</ul></div>
+        <img src="images/repo%20qr.png" class=" size-contain position-right-center" style="">
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+</section></div>
+    </div>
+    <script src="engine/index.js"></script>
+    <!--<script src="engine/d3v4.min.js" charset="utf-8"></script>
+    <script src="engine/charts.min.js" charset="utf-8"></script>
+    <script src="engine/billboard.min.js"></script>-->
+    <script src="engine/pptxgen.min.js"></script>
+                                                   <script src="engine/pfill.js"></script>
+    <script src="engine/published.js"></script>
+
+    <script>
+      Reveal.configure({
+        progress: true,
+        keyboard: true,
+        dependencies: [
+          {
+            src: "engine/highlight.js",
+            sync: true,
+            callback: function () {
+              hljs.initHighlightingOnLoad();
+            },
+          },
+        ],
+      });
+    </script>
+  </body>
+</html>
